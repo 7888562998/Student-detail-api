@@ -20,6 +20,6 @@ app.get("/",(req,res)=>{
 })
 }
 start();
-app.listen(port, () => {
-  console.log(`connection is live to this port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`connection is live to this port ${port}`);
+// });
