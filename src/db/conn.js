@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-mongoose
+
+const connectDB =()=>{
+  mongoose
   .connect(
     "mongodb+srv://js4368621:QlsmnziWRHks69ci@cluster0.ch28xho.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   )
@@ -10,3 +12,7 @@ mongoose
   .catch((e) => {
     console.log("no connection", e);
   });
+}
+
+module.exports={connectDB};
+
