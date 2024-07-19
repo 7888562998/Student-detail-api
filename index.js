@@ -12,12 +12,6 @@ app.use(express.json());
 app.use("/api/v1", studentRouter);
 app.use("/api/v1", registerRouter);
 
-// const start = async () => {
-//   await connectDB();
-//   app.get("/", (req, res) => {
-//     res.send("hello from server side");
-//   });
-// };
 
 const start = async () => {
   try {
@@ -26,10 +20,6 @@ const start = async () => {
 
     app.get("/", (req, res) => {
       res.send("hello from server side");
-    });
-
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
     console.error("Failed to start the server:", error);
