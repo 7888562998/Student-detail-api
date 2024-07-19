@@ -2,8 +2,8 @@ const StudentDetail = require("../models/student");
 
 const getAllStudents = async (req, res) => {
   try {
-    const students = await StudentDetail.find({});
-    res.status(200).send(students);
+    // const students = await StudentDetail.find({});
+    res.status(200).send("students");
   } catch (error) {
     res.status(400).send(error);
   }
