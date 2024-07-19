@@ -14,7 +14,7 @@ app.use("/api/v1", registerRouter);
 
 
 const start =  () => {
-  connectDB()
+  connectDB();
   app.get("/",(req,res)=>{
     res.send("hello from server side")
   })
