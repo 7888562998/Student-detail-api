@@ -14,3 +14,6 @@ app.use("/api/v1", registerRouter);
 app.get("/",(req,res)=>{
   res.send("hello from server side")
 })
+app.listen(port, () => {
+  console.log(`connection is live to this port ${port}`);
+});
