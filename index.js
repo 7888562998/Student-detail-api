@@ -22,8 +22,7 @@ const start = () => {
       console.error("MongoDB connection error:", err);
     });
   app.get("/", async(req, res) => {
-    const students = await StudentDetail.find({});
-    res.status(200).json(students);
+    res.status(200).json("Api ready to use");
   });
 };
 start();
