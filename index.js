@@ -13,21 +13,15 @@ app.use("/api/v1", studentRouter);
 app.use("/api/v1", registerRouter);
 
 
-const start = async () => {
-  try {
-    await connectDB();
-    console.log("Database connected successfully");
-
-    app.get("/", (req, res) => {
-      res.send("hello from server side");
-    });
-  } catch (error) {
-    console.error("Failed to start the server:", error);
+const start =  () => {
+  connectDB()
+  app.get("/",(req,res)=>{
+    res.send("hello from server side")
+  })
   }
-};
-start();
-// app.listen(port, () => {
-//   console.log(`connection is live to this port ${port}`);
-// });
+  start();
+app.listen(port, () => {
+  console.log(`connection is live to this port ${port}`);
+});
 
 module.exports = app;
