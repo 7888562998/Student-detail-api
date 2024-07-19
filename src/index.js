@@ -1,6 +1,6 @@
 const express = require("express");
-const studentRouter = require("./routers/student");
-const registerRouter = require("./routers/UserRegister");
+const studentRouter = require("./routes/student");
+const registerRouter = require("./routes/UserRegister");
 var cors = require("cors");
 require("./db/conn");
 
