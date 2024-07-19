@@ -5,8 +5,8 @@ const {
   createStudent,
   updateStudent,
   deleteStudent,
-} = require("../services/student");
-const { verifyToken } = require("../middleware/verifyToken");
+} = require("../src/services/student");
+const { verifyToken } = require("../src/middleware/verifyToken");
 const router = new express.Router();
 
 router.post("/student", verifyToken, createStudent);
