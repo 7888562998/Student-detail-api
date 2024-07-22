@@ -1,4 +1,11 @@
 const StudentDetail = require("../models/student");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dwlr4n7cm",
+  api_key: "181982871488518",
+  api_secret: "M0x0_ncLxCLNXsCOOPriuLC2ZAY", // Click 'View Credentials' below to copy your API secret
+});
 
 const getAllStudents = async (req, res) => {
   try {
@@ -21,7 +28,19 @@ const getStudentById = async (req, res) => {
 
 const createStudent = async (req, res) => {
   try {
-    const createStudentRecord = new StudentDetail(req.body);
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const { firstName, lastName, dob, fatherName, phoneNumber, city, address } =
+      req.body;
+    const createStudentRecord = new StudentDetail({
+      firstName,
+      lastName,
+      dob,
+      fatherName,
+      phoneNumber: Number(phoneNumber),
+      city,
+      address,
+      profileImage: { id: result.public_id, url: result.url },
+    });
     console.log("body", req.body);
     const studentCreated = await createStudentRecord.save();
     res.status(201).send(studentCreated);
@@ -52,10 +71,24 @@ const deleteStudent = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+const uploadImage = async (req, res) => {
+  try {
+    if (req.file == undefined) {
+      res.send("No file selected!");
+    } else {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      res.status(200).send(result);
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 module.exports = {
   getAllStudents,
   getStudentById,
   createStudent,
   updateStudent,
   deleteStudent,
+  uploadImage,
 };

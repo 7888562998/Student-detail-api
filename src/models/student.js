@@ -34,6 +34,18 @@ const studentSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  profileImage: {
+    url: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    id: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+  },
   createdDate: {
     type: Date,
     default: Date.now,
