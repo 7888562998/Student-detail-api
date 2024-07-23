@@ -1,5 +1,6 @@
 const StudentDetail = require("../models/student");
 const cloudinary = require("cloudinary").v2;
+const { ObjectId } = require("mongodb");
 
 cloudinary.config({
   cloud_name: "dwlr4n7cm",
@@ -19,8 +20,11 @@ const getAllStudents = async (req, res) => {
 const getStudentById = async (req, res) => {
   try {
     const _id = req.params.id;
-    const student = await StudentDetail.findById(_id);
-    res.status(200).send(student);
+    const objectId = new ObjectId(_id);
+    const student = await StudentDetail.aggregate([
+      { $match: { _id: objectId } },
+    ]);
+    res.status(200).send(student[0]);
   } catch (error) {
     res.status(400).send(error);
   }
