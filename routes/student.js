@@ -16,8 +16,8 @@ const upload = multer({
   storage: multer.diskStorage({}),
 });
 
-router.post("/student", upload.single("image"), createStudent);
-router.patch("/student/:id", updateStudent);
+router.post("/student",verifyToken, upload.single("image"), createStudent);
+router.patch("/student/:id",verifyToken,upload.single("image"), updateStudent);
 router.get("/student", verifyToken, getAllStudents);
 router.get("/student/:id", verifyToken, getStudentById);
 router.delete("/student/:id", verifyToken, deleteStudent);

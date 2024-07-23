@@ -52,9 +52,33 @@ const createStudent = async (req, res) => {
 const updateStudent = async (req, res) => {
   try {
     const _id = req.params.id;
+    const { firstName, lastName, dob, fatherName, phoneNumber, city, address } =
+      req.body;
+    const image = req.file ? req.file : null; // Check if the file is provided
+    let result;
+    if (image) {
+      result = await cloudinary.uploader.upload(req.file.path);
+    } else {
+      const data = await StudentDetail.findById(_id);
+      result = {
+        public_id: data.profileImage.id,
+        url: data.profileImage.url,
+      };
+    }
+
+    const createStudentRecord = {
+      firstName,
+      lastName,
+      dob,
+      fatherName,
+      phoneNumber: Number(phoneNumber),
+      city,
+      address,
+      profileImage: { id: result.public_id, url: result.url },
+    };
     const studentUpdated = await StudentDetail.findByIdAndUpdate(
       _id,
-      req.body,
+      createStudentRecord,
       { new: true }
     );
     res.status(200).send(studentUpdated);
