@@ -1,5 +1,6 @@
 const registration = require("../models/signUp");
 const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 const signUp = async (req, res) => {
   try {
@@ -20,7 +21,7 @@ const logIn = async (req, res) => {
       console.log(user, "user1111");
       jwt.sign(
         { uesr: req.body },
-        "jaskaranPreetSingh9478679211",
+        process.env.SECRET_KEY,
         (error, token) => {
           console.log("token", token);
           res.status(200).send({

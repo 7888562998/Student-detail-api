@@ -1,11 +1,12 @@
 const StudentDetail = require("../models/student");
 const cloudinary = require("cloudinary").v2;
 const { ObjectId } = require("mongodb");
+require('dotenv').config();
 
 cloudinary.config({
-  cloud_name: "dwlr4n7cm",
-  api_key: "181982871488518",
-  api_secret: "M0x0_ncLxCLNXsCOOPriuLC2ZAY", // Click 'View Credentials' below to copy your API secret
+  cloud_name:process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret, // Click 'View Credentials' below to copy your API secret
 });
 
 const getAllStudents = async (req, res) => {
